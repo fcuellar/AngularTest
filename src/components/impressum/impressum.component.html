@@ -1,23 +1,42 @@
 <div class="container">
-<div class="row mt-3">
-<div class="col-md-7 mb-3">
+  <!-- Bootstrap container class for proper spacing and responsive layout -->
+  
+  <div class="row mt-3">
+    <!-- Bootstrap row with margin-top 3 (spacing from elements above) -->
+    
+    <div class="col-md-7 mb-3">
+      <!-- Bootstrap column that takes 7/12 of the width on medium screens and above -->
+      <!-- Has margin-bottom 3 for spacing below -->
 
-<h3 class="alert alert-primary" role="alert">Impressum</h3>
+      <h3 class="alert alert-primary" role="alert">
+        <!-- h3 heading styled as a blue Bootstrap alert -->
+        Impressum
+        <!-- "Impressum" is the German term for the legal information/imprint page -->
+      </h3>
 
-<p class="alert alert-light" role="alert">
-  Adresse: <br />
-  Coffe Shop GmbH<br />
-  Bremer Straße 12 <br />
-  28217 Bremen
-</p>
-<p></p>
+      <p class="alert alert-light" role="alert">
+        <!-- Paragraph styled as a light gray Bootstrap alert -->
+        Adresse: <br />
+        <!-- <br> creates a line break -->
+        Coffe Shop GmbH<br />
+        Bremer Straße 12 <br />
+        28217 Bremen
+        <!-- Company address information -->
+      </p>
+      
+      <p></p>
+      <!-- Empty paragraph for additional spacing -->
 
-
-
-<p class="alert alert-light" role="alert">
-Kontakt: <br />
-Telfon: 0421 388049 - 0<br />
-Fax: 033556492 11 <br />
-E-Mail: {{"coffeshop@gmail.com"}}
-</p>
+      <p class="alert alert-light" role="alert">
+        <!-- Another paragraph styled as a light gray Bootstrap alert -->
+        Kontakt: <br />
+        Telfon: 0421 388049 - 0<br />
+        Fax: 033556492 11 <br />
+        E-Mail: {{"coffeshop@gmail.com"}}
+        <!-- Contact information with phone, fax, and email -->
+        <!-- Note: The email is in double curly braces, which is Angular's interpolation -->
+        <!-- In this case it's not necessary since it's a static string -->
+      </p>
+    </div>
+  </div>
 </div>

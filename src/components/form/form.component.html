@@ -1,8 +1,17 @@
+<!-- Main container for the form -->
 <div class="container">
+  <!-- Heading tells users what this form is for - "Add your grades" -->
   <h2>Füg deine Noten ein:</h2>
+  
+  <!-- Bootstrap form with row layout and g-3 spacing between elements -->
   <form class="row g-3">
+    
+    <!-- ID field group - takes up 3 columns on medium+ screens -->
     <div class="col-md-3">
+      <!-- Label for the ID input -->
       <label for="inputid" class="form-label">ID:</label>
+      
+      <!-- ID input field - [(ngModel)] creates two-way data binding with klasse.id property -->
       <input
         [(ngModel)]="klasse.id"
         type="number"
@@ -12,8 +21,13 @@
         name="inputid"
       />
     </div>
+    
+    <!-- Subject name field group - takes up 3 columns on medium+ screens -->
     <div class="col-md-3">
+      <!-- Label for the subject name -->
       <label for="inputfachname" class="form-label">Fachname:</label>
+      
+      <!-- Subject name input with two-way binding to klasse.fachname -->
       <input
         [(ngModel)]="klasse.fachname"
         type="text"
@@ -23,8 +37,13 @@
         name="inputfachname"
       />
     </div>
+    
+    <!-- Grade field group - takes up all 12 columns (full width) -->
     <div class="col-12">
+      <!-- Label for the grade input -->
       <label for="inputNote" class="form-label">Note</label>
+      
+      <!-- Grade input with two-way binding to klasse.not -->
       <input
         [(ngModel)]="klasse.not"
         type="number"
@@ -34,17 +53,26 @@
         name="inputNote"
       />
     </div>
+    
+    <!-- Category dropdown group -->
     <div>
+      <!-- Label for the category dropdown -->
       <label for="inputKategorie" class="form-label">Kategorie:</label>
+      
+      <!-- Dropdown select menu with two-way binding to klasse.kategorie -->
       <select class="form-select" aria-label="Default select example" 
        [(ngModel)]="klasse.kategorie" name="inputKategorie">
-      @for(k of kategories; track k.lable){
-        <option [ngValue]="k">{{ k.lable }}</option>
-      }
-    
+        <!-- Loop through all available categories to create dropdown options -->
+        @for(k of kategories; track k.lable){
+          <!-- Option element binds the whole category object, not just its name -->
+          <option [ngValue]="k">{{ k.lable }}</option>
+        }
       </select>
     </div>
+    
+    <!-- Pass/fail checkbox -->
     <div class="form-check">
+      <!-- Checkbox input with two-way binding to klasse.bestanden (passed status) -->
       <input
         class="form-check-input"
         type="checkbox"
@@ -53,16 +81,21 @@
         name="bestanden"
         [(ngModel)]="klasse.bestanden"
       />
+      <!-- Label for the checkbox - "Passed" -->
       <label class="form-check-label" for="flexCheckChecked"> Bestanden </label>
     </div>
 
+    <!-- Error message - only shown when the error flag is true -->
     @if(error){
-    <div class="alert alert-warning" role="alert">
-      Bitte füllen Sie alle Felder aus
-    </div>
+      <!-- Warning alert that asks user to fill in all fields -->
+      <div class="alert alert-warning" role="alert">
+        Bitte füllen Sie alle Felder aus
+      </div>
     }
 
+    <!-- Submit button container -->
     <div class="col-12">
+      <!-- Submit button that calls save() method when clicked -->
       <button class="btn btn-primary" type="submit" (click)="save()">
         absenden
       </button>

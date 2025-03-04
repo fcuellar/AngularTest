@@ -1,65 +1,88 @@
+<!-- Main container div - uses Bootstrap's 'container' class for proper spacing and responsive layout -->
 <div class="container">
+  <!-- Main heading that tells users what page they're viewing -->
   <h1>Meine Note</h1>
+
+  <!-- Alert box showing the average grade - green success style for positive presentation -->
+  <!-- The double curly braces {{ }} display a value from the component's TypeScript file, go to home.component.ts, it will access averageNote from that file and put a green box around it :) . -->
   <div class="alert alert-success" role="alert">
     Durchschnitt: {{ averageNote }}
   </div>
+
+  <!-- Table to display all grade entries in an organized format -->
+  <!-- Bootstrap classes for styling:
+       - table: basic table styling
+       - table-striped: alternating row colors for better readability
+       - table-hover: highlights rows on mouse hover -->
   <table class="table table-striped table-hover">
+    <!-- The table header section - contains column titles -->
     <thead>
       <tr>
+        <!-- Column headers explaining what each column contains -->
         <th>ID</th>
-        <th>Fachname</th>
-        <th>Note</th>
-        <th>Bestanden</th>
-        <th>Kategorie</th>
+        <th>Fachname</th>  <!-- Subject name -->
+        <th>Note</th>      <!-- Grade -->
+        <th>Bestanden</th> <!-- Passed status -->
+        <th>Kategorie</th> <!-- Category -->
+        <!-- Three empty headers for the action buttons -->
         <th></th>
         <th></th>
         <th></th>
       </tr>
     </thead>
+
+    <!-- The table body section - contains the actual grade data -->
     <tbody>
+      <!-- Angular loop to create a row for each grade in the 'noten' array -->
+      <!-- 'track n.id' helps Angular efficiently update the DOM when items change -->
       @for(n of noten; track n.id){
       <tr>
-        <td>{{ n.id }}</td>
-        <td>{{ n.fachname }}</td>
-        <td>{{ n.not }}</td>
+        <!-- Table cells displaying each property of the current grade -->
+        <td>{{ n.id }}</td>        <!-- Grade ID -->
+        <td>{{ n.fachname }}</td>  <!-- Subject name -->
+        <td>{{ n.not }}</td>       <!-- Actual grade value -->
+        
+        <!-- Conditional display: "JA" if passed, "NEIN" if not -->
         @if(n.bestanden){
         <td>JA</td>
         } @else {
         <td>NEIN</td>
         }
+        
+        <!-- Display category name with "?" to safely handle null values -->
+        <!-- The "?" prevents errors if a grade has no category assigned -->
         <td>{{ n.kategorie?.lable }}</td>
+        
+        <!-- Edit button - navigates to the form page with this grade's ID -->
         <td>
-          <button
-            class="material-symbols-outlined"
-            type="button"
-            [routerLink]="['form', n.id]"
-          >
+          <button class="material-symbols-outlined" type="button" [routerLink]="['form', n.id]">
+            <!-- The text "edit" displays as a pencil icon due to the Material symbols font -->
             edit
           </button>
         </td>
+        
+        <!-- Details button - navigates to the details page with this grade's ID -->
         <td>
-          <button
-            class="material-symbols-outlined"
-            type="button"
-            [routerLink]="['details-seite', n.id]"
-          >
+          <button class="material-symbols-outlined" type="button" [routerLink]="['details-seite', n.id]">
+            <!-- The text "info" displays as an information icon -->
             info
           </button>
         </td>
+        
+        <!-- Delete button - calls the delete() method when clicked -->
         <td>
-          <button
-            type="button"
-            class="material-symbols-outlined"
-            (click)="delete(n)"
-          >
+          <button type="button" class="material-symbols-outlined" (click)="delete(n)">
+            <!-- The text "delete" displays as a trash bin icon -->
             delete
           </button>
         </td>
       </tr>
-      }
+      }  <!-- End of the @for loop -->
     </tbody>
   </table>
 </div>
-<div div class="alert alert-success" role="alert">
-  Du hast insgesamt {{ noten.length }}
+
+<!-- Second alert box showing the total count of grades -->
+<div class="alert alert-success" role="alert">
+  Du hast insgesamt {{ noten.length }}  <!-- Shows how many grades are in the array -->
 </div>
