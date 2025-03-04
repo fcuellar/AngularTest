@@ -1,0 +1,26 @@
+<table class="table">
+<thead>
+  <tr>
+    <th class="table-primary" ></th>
+    <th class="table-primary">Informationen</th>
+  </tr>
+</thead>
+<tbody>
+  <tr class="table-secondary">
+    <th >ID</th>
+   <td>{{ klasse.id }}</td>
+  </tr>
+  <tr class="table-success">
+    <th >Fach</th>
+   <td>{{ klasse.fachname }}</td>
+  </tr>
+  <tr class="table-warning">
+    <th >Note</th>
+    <td>{{ klasse.not }}</td>
+  </tr>
+  <tr class="table">
+  <th >Kategorie</th>
+  <td>{{ klasse.kategorie?.lable }}</td>
+</tr>
+</tbody>
+</table>
