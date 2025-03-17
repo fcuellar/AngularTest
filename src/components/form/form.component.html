@@ -12,6 +12,7 @@
       <label for="inputid" class="form-label">ID:</label>
       
       <!-- ID input field - [(ngModel)] creates two-way data binding with klasse.id property -->
+      <!-- REMEBER klasse is the name you gave to the class in line 17 of the form.component.ts so its gunno be whatever name you give, we use ngModel to CONNECT the html input to the form.component.ts file so for this one we want to get klasse.id -->
       <input
         [(ngModel)]="klasse.id"
         type="number"
