@@ -70,10 +70,9 @@ export class FormComponent implements OnInit {
  // END OF CONSTRUCTOR
   
   ngOnInit() {}
-  // honestly dont know if u need this, maybe test. 
-  // Lifecycle hook - empty as initialization is done in constructor
-// SAVE FUNCTION
-  
+  // Lifecycle hook - empty as initialization is done in constructo
+
+  // SAVE FUNCTION  
   save() {
     // Method called when the form is submitted
     // here you are just checking to see if your grade / game is not empty which is why you have the "!". 
