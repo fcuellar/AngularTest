@@ -16,12 +16,15 @@ import { Kategorie } from '../../model/kategorie';
 export class FormComponent implements OnInit {
   klasse: Klasse;
   // Property to hold the current grade being edited or created
+  // NEED THIS TO STORE CURRENT DATA, ONCE YOU ARE DONE YOU MUST SET THIS TO EMPTY (line 92 and 80)
   
   id: number;
   // Property to store the ID from the route parameter
+  // need to store an ID if we have one or not
   
   error: boolean;
   // Flag to track validation errors
+  // do this to track errors
   
   constructor(
     private route: ActivatedRoute,
@@ -36,14 +39,16 @@ export class FormComponent implements OnInit {
     The Router gives you a way to say "now go to this other page" in your code */
     // Injected to enable programmatic navigation
     
-    private mydate: MyDataService,
+    private mydataService: MyDataService,
     // Injected to access grade data
     
     private kategorieDataService: MyKategorieService
     // Injected to access categories
   ) {
+
+    // ALL OF THIS WILL HAPPEN AT THE START OF THE PAGE
     this.error = false;
-    // Initialize error flag to false
+    // Initialize error flag to false, 
     
     this.klasse = new Klasse(null, null, null);
     // Create a new empty grade object
@@ -51,20 +56,28 @@ export class FormComponent implements OnInit {
     this.id = parseInt(this.route.snapshot.paramMap.get('id'));
     // this is from private route: ActivatedRoute
     // Try to get the ID from the route parameter and convert to number
-    
+    // YOU ARE CHECKING IF AN ID EXISTS BECAUSE YOU MIGHT BE EDITING A GRADE, might need to cheat that line ^ 56
+
+    // this line means IF this.id EXISTS / NOT EMPTY (from line 56) then that means we are EDITING an existing grade/game so we have to retrieve the data, this is where we need the findByID method from the gameDataService 
     if (this.id) {
       // If we have an ID, this is an edit operation
-      this.klasse = this.mydate.findByID(this.id);
+      this.klasse = this.mydataService.findByID(this.id);
       // Load the existing grade data
+      // THIS IS PUTTING THE ID's DATA INTO THE klasse variable we made in line 17 which is currently empty (line 53) 
+      // THIS IF STATE IS BECAUSE WE HAVE to check if its an EDIT or now we continue to the SAVE function which is part 2 of this. 
     }
   }
-
+ // END OF CONSTRUCTOR
+  
   ngOnInit() {}
+  // honestly dont know if u need this, maybe test. 
   // Lifecycle hook - empty as initialization is done in constructor
-
+// SAVE FUNCTION
+  
   save() {
     // Method called when the form is submitted
-    
+    // here you are just checking to see if your grade / game is not empty which is why you have the "!". 
+    // THIS IS HOW YOU WOULD READ THIS: if NO class id OR NO class name OR no class grade, set error = to true because something is empty. ELSE continue 
     if (!this.klasse.id || !this.klasse.fachname || !this.klasse.not) {
       // Check if required fields are filled
       this.error = true;
@@ -74,10 +87,11 @@ export class FormComponent implements OnInit {
       
       if (!this.id) {
         // If no ID from route, this is a new grade
-        this.mydate.saveNote(this.klasse);
+        this.mydataService.saveNote(this.klasse);
         // Save the new grade
         this.klasse = new Klasse(null, null, null);
         // Reset the form with a new empty grade
+        //  YOU ARE BASICALLY making the form empty again, klasse is the ARRAY you created at the top of the page ^
       }
       
       this.router.navigate([""]);
@@ -88,9 +102,11 @@ export class FormComponent implements OnInit {
       // Alternative way to navigate
       
       this.klasse = new Klasse(null, null, null);
-      // Reset the form data
+      // Reset the form data, dont know if you need to do this again. 
     }
   }
+
+  // END OF SAVE FUNCTION 
 
   get kategories(): Kategorie[] {
     // Getter to provide the list of categories to the template
